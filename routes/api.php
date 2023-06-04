@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ToDoController;
+use App\Http\Controllers\ToDoDetailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('todos', [ToDoController::class, 'index']); # todosというURLに対してToDoControllerのindexが呼ばれるようになる
 Route::resource('todos', ToDoController::class); # resourceを使えばデフォルトの設定を使える（上みたいにいちいち設定しなくてよい）
+Route::resource('todoDetails', ToDoDetailController::class); # resourceを使えばデフォルトの設定を使える（上みたいにいちいち設定しなくてよい）

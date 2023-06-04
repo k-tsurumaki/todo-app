@@ -13,4 +13,13 @@ class ToDo extends Model # モデルはToDosの一行と紐づいている
     {
         return $this->hasMany(ToDoDetail::class); # ToDoはToDoDetailをたくさん持っているというリレーションを意味している（このToDoDetailはモデル名を指している）
     }
+
+    public function delete()
+    {
+        // 関連するToDoDetailsのレコードを削除する
+        $this->toDoDetails()->delete();
+
+        // ToDoのレコードを削除する
+        return parent::delete();
+    }
 }
