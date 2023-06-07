@@ -15,9 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $todo = ToDo::factory()->create(); # ToDoというモデルをファクトリーから作る
-        ToDoDetail::factory(5)->create([ # 5個作る
-            'to_do_id' => $todo->id
+        $todo = ToDo::factory()->create();
+        ToDoDetail::factory(5)->create([
+            'to_do_id' => $todo->id,
         ]);
     }
 }
