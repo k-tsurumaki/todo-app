@@ -3,10 +3,10 @@ import { values } from "lodash";
 import React from "react";
 import ToDoDetail from "./ToDoDetail";
 
-function ToDo() {
+function ToDo(props) {
     return (
         <Card>
-            <CardHeader title="test" />
+            <CardHeader title={props.toDo.title} />
             <CardContent>
                 <List>
                     {[0, 1, 2, 3].map((value) => {
