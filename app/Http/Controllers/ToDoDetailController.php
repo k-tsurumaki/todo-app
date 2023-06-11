@@ -83,8 +83,9 @@ class ToDoDetailController extends Controller
         // idに紐付くToDoDetailモデルを取得する
         $toDoDetail = ToDoDetail::find($id);
         
-        // ネームをToDoDetailモデルに設定する
+        // ToDoDetailモデルに設定する
         $toDoDetail->name = $request->get('name');
+        $toDoDetail->completed_flag = $request->get('completed_flag');
         
         // ToDoDetailテーブルを更新する
         $toDoDetail -> save();

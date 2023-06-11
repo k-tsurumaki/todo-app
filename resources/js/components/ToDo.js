@@ -1,16 +1,43 @@
-import { Card, CardContent, CardHeader, List } from "@mui/material";
-import { values } from "lodash";
-import React from "react";
+import { Card, CardContent, CardHeader, List, TextField } from "@mui/material";
+import React, { useState } from "react";
 import ToDoDetail from "./ToDoDetail";
+import { useUpdateToDoMutateTask } from "../hooks/ToDo";
+import { set } from "lodash";
 
 function ToDo(props) {
+    const [timer, setTimer] = useState(null);
+    let toDo = {
+        id: props.toDo.id,
+        title: props.toDo.title,
+    };
+
+    const { updateToDoMutation } = useUpdateToDoMutateTask();
+    const eventUpdateToDo = (event) => {
+        clearTimeout(timer); //eventが呼び出されるたびにタイマーをリセット
+
+        const newTimer = setTimeout(() => { // 0.5s経ったら実行される
+            let data = {
+                ...toDo,
+                title: event.target.value,
+            };
+            updateToDoMutation.mutate(data);
+        }, 500);
+        setTimer(newTimer);
+    };
+
     return (
         <Card>
-            <CardHeader title={props.toDo.title} />
+            <TextField
+                variant="standard"
+                margin="dense"
+                defaultValue={props.toDo.title}
+                fullWidth
+                onChange={eventUpdateToDo}
+            />
             <CardContent>
                 <List>
-                    {[0, 1, 2, 3].map((value) => {
-                        return <ToDoDetail id={value} />;
+                    {props.toDo.to_do_details.map((detail) => {
+                        return <ToDoDetail key={detail.id} detail={detail} />;
                     })}
                 </List>
             </CardContent>
