@@ -1,8 +1,20 @@
-import { Card, CardContent, CardHeader, List, TextField } from "@mui/material";
+import {
+    Card,
+    CardActions,
+    CardContent,
+    CardHeader,
+    IconButton,
+    List,
+    TextField,
+} from "@mui/material";
 import React, { useState } from "react";
 import ToDoDetail from "./ToDoDetail";
-import { useUpdateToDoMutateTask } from "../hooks/ToDo";
+import {
+    useDeleteToDoMutateTask,
+    useUpdateToDoMutateTask,
+} from "../hooks/ToDo";
 import { set } from "lodash";
+import { Delete } from "@mui/icons-material";
 
 function ToDo(props) {
     const [timer, setTimer] = useState(null);
@@ -11,11 +23,13 @@ function ToDo(props) {
         title: props.toDo.title,
     };
 
+    /**名称更新イベント */
     const { updateToDoMutation } = useUpdateToDoMutateTask();
     const eventUpdateToDo = (event) => {
         clearTimeout(timer); //eventが呼び出されるたびにタイマーをリセット
 
-        const newTimer = setTimeout(() => { // 0.5s経ったら実行される
+        const newTimer = setTimeout(() => {
+            // 0.5s経ったら実行される
             let data = {
                 ...toDo,
                 title: event.target.value,
@@ -23,6 +37,12 @@ function ToDo(props) {
             updateToDoMutation.mutate(data);
         }, 500);
         setTimer(newTimer);
+    };
+
+    /**削除イベント */
+    const { deleteToDoMutation } = useDeleteToDoMutateTask();
+    const eventDeleteToDo = (event) => {
+        deleteToDoMutation.mutate(toDo);
     };
 
     return (
@@ -41,6 +61,15 @@ function ToDo(props) {
                     })}
                 </List>
             </CardContent>
+            <CardActions>
+                <IconButton
+                    edge="end"
+                    aria-label="delete"
+                    onClick={eventDeleteToDo}
+                >
+                    <Delete />
+                </IconButton>
+            </CardActions>
         </Card>
     );
 }

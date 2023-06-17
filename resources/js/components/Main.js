@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Box } from "@mui/system";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ReactQueryDevtools } from "react-query/devtools";
 import Navigation from "./Navigation";
 import Home from "../pages/home";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -20,6 +21,7 @@ function Main() {
                             <Route path="/" exact component={Home} />
                         </Switch>
                     </main>
+                    <ReactQueryDevtools></ReactQueryDevtools>
                 </QueryClientProvider>
             </Router>
         </Box>
