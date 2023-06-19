@@ -21,7 +21,7 @@ function Main() {
                             <Route path="/" exact component={Home} />
                         </Switch>
                     </main>
-                    <ReactQueryDevtools></ReactQueryDevtools>
+                    {/* <ReactQueryDevtools></ReactQueryDevtools> */}
                 </QueryClientProvider>
             </Router>
         </Box>

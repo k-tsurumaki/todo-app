@@ -24,7 +24,7 @@ class StoreRequest extends FormRequest # バリデーションなどのルール
     public function rules()
     {
         return [
-            'title' => 'required|string'
+            'title' => 'nullable|string'
         ];
     }
 }
