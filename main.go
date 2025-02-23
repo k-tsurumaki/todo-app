@@ -50,4 +50,9 @@ func main() {
 	for _, v := range todos {
 		fmt.Println(v)
 	}
+
+	todosByUser, _ := user.GetTodosByUser()
+	for _, v := range todosByUser {
+		fmt.Println(v)
+	}
 }
