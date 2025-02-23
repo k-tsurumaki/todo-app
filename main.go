@@ -16,13 +16,13 @@ func main() {
 
 	fmt.Println(models.DB)
 
-	u := &models.User{}
-	u.Name = "test"
-	u.Email = "text@example.com"
-	u.Password = "testtest"
-	fmt.Println(u)
+	// u := &models.User{}
+	// u.Name = "test"
+	// u.Email = "text@example.com"
+	// u.Password = "testtest"
+	// fmt.Println(u)
 
-	u.CreateUser()
+	// u.CreateUser()
 
 	// u, _ := models.GetUser(1)
 	// fmt.Println(u)
@@ -37,6 +37,9 @@ func main() {
 	// u, _ = models.GetUser(1)
 	// fmt.Println(u)
 
-	user, _ := models.GetUser(1)
-	user.CreateTodo("Hello World")
+	// user, _ := models.GetUser(1)
+	// user.CreateTodo("Hello World")
+
+	t, _ := models.GetTodo(1)
+	fmt.Println(t)
 }
