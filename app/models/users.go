@@ -99,10 +99,19 @@ func (sess *Session) CheckSession() (valid bool, err error) {
 	err = DB.QueryRow(cmd, sess.UUID).Scan(&sess.ID, &sess.UUID, &sess.Email, &sess.UserID, &sess.CreatedAt)
 	if err != nil {
 		valid = false
-		return 
+		return
 	}
 	if sess.ID != 0 {
 		valid = true
 	}
 	return valid, err
+}
+
+func (sess *Session) DeleteSessionByUUID() (err error) {
+	cmd := `delete from sessions where uuid = ?`
+	_, err = DB.Exec(cmd, sess.UUID)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	return err
 }
